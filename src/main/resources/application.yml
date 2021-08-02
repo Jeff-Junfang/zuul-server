@@ -1,0 +1,25 @@
+# 应用名称
+spring:
+  application:
+    name: zuul-server
+
+server:
+  port: 8031
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://eureka-server1:8761/eureka/,http://eureka-server2:8762/eureka/
+
+zuul:
+  prefix: /springhealth
+  ignored-services: "*"
+  routes:
+    user-service: /user/**
+    ## 路由到第三方服务
+    third-service:
+      path: /third/**
+      url: http://thirdparty.com/thirdpartyservice
+
